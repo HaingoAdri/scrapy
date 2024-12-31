@@ -1,0 +1,34 @@
+<header id="header"> 
+    <div id="header-inner"> <button id="burgerMenu" class="burgerMenu"> <span id="span1"></span> <span id="span2"></span> <span id="span3"></span> </button> <a href="https://www.winandmore.be/" id="logo">Golden Palace</a> 
+     <div id="flip" class="appearBurgerMenu"> 
+      <div id="appear"> 
+       <nav id="main"> 
+        <ul> 
+         <li class="active"> <a href="https://www.winandmore.be/accueil.htm?lng=en"> Home </a> </li> 
+         <li> <a href="https://www.winandmore.be/participez.htm?lng=en"> Take part </a> </li> 
+         <li> <a href="https://www.winandmore.be/cadeaux.htm?lng=en"> Gifts </a> </li> 
+         <li> <a href="https://store.winandmore.be/en" rel="noopener noreferrer" target="_blank"> Halls </a> </li> 
+         <li> <a href="https://www.winandmore.be/ra-glement.htm?lng=en"> Rules </a> </li> 
+        </ul> 
+       </nav> 
+       <nav id="language"> <span class="active">EN</span> 
+        <ul> 
+         <li> <a href="https://goldenpalace.stores-mobilosoft.be/fr">FR</a> </li> 
+         <li> <a href="https://goldenpalace.stores-mobilosoft.be/nl">NL</a> </li> 
+        </ul> 
+       </nav> 
+      </div> 
+     </div> 
+    </div> 
+   </header>
+   =IF(REGEXMATCH(input!B38, "\b\d+[A-Za-z0-9\/]*\b"), 
+   IF(OR(REGEXMATCH(LEFT(input!B38,FIND(REGEXEXTRACT(input!B38, "\b\d+[A-Za-z0-9\/]*\b"),input!B38)-1), "\b[a-zA-Z]+"), 
+          REGEXMATCH(LEFT(input!B38,FIND(REGEXEXTRACT(input!B38, "\b\d+[A-Za-z0-9\/]*\b"),input!B38)-1), "\b[^\d]+")), 
+       REGEXEXTRACT(input!B38, "\b\d+[A-Za-z0-9\/]*\b"), 
+       MID(input!B38, FIND(REGEXEXTRACT(input!B38, "\b\d+[A-Za-z0-9\/]*\b"),input!B38)+LEN(REGEXEXTRACT(input!B38, "\b\d+[A-Za-z0-9\/]*\b"))+1, LEN(input!B38))
+   ), 
+   IF(REGEXMATCH(input!B38, ",\s*\d{4,5}\b"), 
+       MID(input!B38, FIND(",", input!B38)+1, FIND("\b\d{4,5}\b", input!B38)-FIND(",", input!B38)-1), 
+       MID(input!B38, FIND(",", input!B38)+1, LEN(input!B38)-FIND(",", input!B38))
+   )
+)
